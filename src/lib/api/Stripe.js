@@ -38,5 +38,14 @@ exports.Stripe = {
         if (res.status !== "succeeded") {
             throw new Error("failed to create charge with Stripe");
         }
+    }),
+    disconnect: (stripeUserId) => __awaiter(void 0, void 0, void 0, function* () {
+        /* eslint-disable @typescript-eslint/camelcase */
+        const response = yield client.oauth.deauthorize({
+            client_id: `${process.env.S_CLIENT_ID}`,
+            stripe_user_id: stripeUserId
+        });
+        /* eslint-enable @typescript-eslint/camelcase */
+        return response;
     })
 };
